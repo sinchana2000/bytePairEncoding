@@ -14,7 +14,7 @@ BPE starts from raw UTF-8 bytes (ids 0 to 255) and repeatedly merges the most fr
 
 | File | Purpose |
 |------|---------|
-| `bpe_tokenizer.py` | The tokenizer plus a built-in set of self-checks |
+| `BPEimpl.py` | The tokenizer plus a built-in set of self-checks |
 
 ## API
 
@@ -60,23 +60,8 @@ assert tok.decode(tok.encode(s)) == s
 The bottom of the file contains a small test harness. Run it directly:
 
 ```bash
-python bpe_tokenizer.py
+python BPEimpl.py
 ```
-
-Expected output:
-
-```
-[✓] TODO 1 get_pair_counts
-[✓] TODO 2 merge
-[✓] TODO 3 train
-[✓] TODO 4 decode
-[✓] TODO 5 encode
-    26 bytes -> 16 tokens
-[✓] Round trip (incl. Kannada + emoji)
-```
-
-The checks cover pair counting, merge edge cases (overlaps, absent pairs, empty input), the expected merge order on `"aaabdaaabac"`, decode correctness, encode compression, and a full round trip on English, Kannada and emoji text. The last check trains on the source file itself.
-
 ## Requirements
 
 Python 3.9 or newer. There are no third-party dependencies.
