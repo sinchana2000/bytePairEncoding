@@ -80,17 +80,3 @@ The checks cover pair counting, merge edge cases (overlaps, absent pairs, empty 
 ## Requirements
 
 Python 3.9 or newer. There are no third-party dependencies.
-
-## Limitations
-
-- **Tie-breaking:** when several pairs have the same top frequency, the one seen first in the text wins. Merge order is deterministic but depends on the training text.
-- **Vocab size:** `train` raises `ValueError` if `vocab_size` asks for more merges than the text has distinct pairs to give (the text runs out of pairs).
-- **Speed:** pair counts are recomputed from scratch on every merge, and `encode` rescans the whole sequence per merge, so cost grows with both text length and vocabulary size. It is meant for learning and small corpora, not production use.
-- **No pre-tokenization:** merges can cross word and punctuation boundaries. There is no regex splitting step as in GPT-style tokenizers.
-- **No special tokens:** there is no handling for tokens such as end-of-text, and no save/load for the learned merges.
-
-## Possible next steps
-
-- Add a regex pre-tokenizer so merges stay inside words.
-- Add special tokens and save/load for `merges`.
-- Update pair counts incrementally instead of recounting after every merge.
